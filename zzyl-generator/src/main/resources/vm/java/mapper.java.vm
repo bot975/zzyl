@@ -3,7 +3,7 @@ package ${packageName}.mapper;
 import java.util.List;
 import ${packageName}.domain.${ClassName};
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import org.apache.ibatis.annotations.Mapper
+import org.apache.ibatis.annotations.Mapper;
 #if($table.sub)
 import ${packageName}.domain.${subClassName};
 
