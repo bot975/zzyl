@@ -3,6 +3,7 @@ package com.zzyl.nursing.service.impl;
 import java.util.Arrays;
 import java.util.List;
 import com.zzyl.common.utils.DateUtils;
+import com.zzyl.nursing.vo.NursingLevelVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.zzyl.nursing.mapper.NursingLevelMapper;
@@ -92,5 +93,10 @@ public class NursingLevelServiceImpl extends ServiceImpl<NursingLevelMapper, Nur
     public int deleteNursingLevelById(Long id)
     {
         return removeById(id) ? 1 : 0;
+    }
+
+    @Override
+    public List<NursingLevelVo> selectNursingLevelVoList(NursingLevel nursingLevel) {
+        return nursingLevelMapper.selectNursingLevelVoList(nursingLevel);
     }
 }
