@@ -14,8 +14,8 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 /**
  * 护理等级Service业务层处理
  * 
- * @author bot975
- * @date 2026-08-24
+ * @author alexis
+ * @date 2025-06-02
  */
 @Service
 public class NursingLevelServiceImpl extends ServiceImpl<NursingLevelMapper, NursingLevel> implements INursingLevelService
@@ -68,7 +68,7 @@ public class NursingLevelServiceImpl extends ServiceImpl<NursingLevelMapper, Nur
     @Override
     public int updateNursingLevel(NursingLevel nursingLevel)
     {
-        return updateById(nursingLevel)? 1: 0;
+        return updateById(nursingLevel) ? 1 : 0;
     }
 
     /**
@@ -95,6 +95,12 @@ public class NursingLevelServiceImpl extends ServiceImpl<NursingLevelMapper, Nur
         return removeById(id) ? 1 : 0;
     }
 
+    /**
+     * 查询护理等级Vo列表
+     *
+     * @param nursingLevel 条件
+     * @return 结果
+     */
     @Override
     public List<NursingLevelVo> selectNursingLevelVoList(NursingLevel nursingLevel) {
         return nursingLevelMapper.selectNursingLevelVoList(nursingLevel);

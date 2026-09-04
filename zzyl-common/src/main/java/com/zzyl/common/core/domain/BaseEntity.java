@@ -18,45 +18,45 @@ import io.swagger.annotations.ApiModelProperty;
  * 
  * @author ruoyi
  */
-@ApiModel("实体类的基类")
+@ApiModel(value = "实体类的基类")
 public class BaseEntity implements Serializable
 {
     private static final long serialVersionUID = 1L;
 
     /** 搜索值 */
+    @ApiModelProperty(value = "搜索值")
     @JsonIgnore
-    @ApiModelProperty("搜索值")
     @TableField(exist = false)
     private String searchValue;
 
     /** 创建者 */
-    @ApiModelProperty("创建者")
-    @TableField(fill= FieldFill.INSERT)
+    @ApiModelProperty(value = "创建者")
+    @TableField(fill = FieldFill.INSERT)
     private String createBy;
 
     /** 创建时间 */
-    @ApiModelProperty("创建时间")
+    @ApiModelProperty(value = "创建时间")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @TableField(fill=FieldFill.INSERT)
+    @TableField(fill = FieldFill.INSERT)
     private Date createTime;
 
     /** 更新者 */
-    @ApiModelProperty("更新者")
-    @TableField(fill=FieldFill.UPDATE)
+    @ApiModelProperty(value = "更新者")
+    @TableField(fill = FieldFill.UPDATE)
     private String updateBy;
 
     /** 更新时间 */
-    @ApiModelProperty("更新时间")
+    @ApiModelProperty(value = "更新时间")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @TableField(fill=FieldFill.UPDATE)
+    @TableField(fill = FieldFill.UPDATE)
     private Date updateTime;
 
     /** 备注 */
-    @ApiModelProperty("备注")
+    @ApiModelProperty(value = "备注")
     private String remark;
 
     /** 请求参数 */
-    @ApiModelProperty("请求参数")
+    @ApiModelProperty(value = "请求参数")
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     @TableField(exist = false)
     private Map<String, Object> params;

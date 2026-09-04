@@ -26,11 +26,10 @@ import com.zzyl.common.core.domain.TreeEntity;
 #elseif($table.tree)
 #set($Entity="TreeEntity")
 #end
-
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@ApiModel("${functionName}实体")
+@ApiModel(value="${ClassName}对象", description="${functionName}")
 public class ${ClassName} extends ${Entity}
 {
     private static final long serialVersionUID = 1L;

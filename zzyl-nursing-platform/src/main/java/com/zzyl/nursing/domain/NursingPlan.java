@@ -11,14 +11,13 @@ import com.zzyl.common.core.domain.BaseEntity;
 /**
  * 护理计划对象 nursing_plan
  * 
- * @author bot975
- * @date 2026-08-24
+ * @author alexis
+ * @date 2025-06-02
  */
-
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@ApiModel("护理计划实体")
+@ApiModel(value="NursingPlan对象", description="护理计划")
 public class NursingPlan extends BaseEntity
 {
     private static final long serialVersionUID = 1L;

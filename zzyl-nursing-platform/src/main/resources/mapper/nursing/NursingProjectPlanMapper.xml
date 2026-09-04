@@ -37,7 +37,6 @@
         <include refid="selectNursingProjectPlanVo"/>
         where id = #{id}
     </select>
-
     <select id="selectByNursingPlanId" resultType="com.zzyl.nursing.vo.NursingProjectPlanVo">
         select id,
                plan_id,
@@ -79,8 +78,9 @@
         </trim>
     </insert>
     <insert id="batchInsert">
-        insert into nursing_project_plan (plan_id, project_id, execute_time, execute_cycle, execute_frequency, create_time, remark) values
-        <foreach collection="list" item="item" separator=",">
+        insert into nursing_project_plan (plan_id, project_id, execute_time, execute_cycle, execute_frequency, create_time, remark)
+        values
+        <foreach item="item" collection="list" separator=",">
             (#{planId}, #{item.projectId}, #{item.executeTime}, #{item.executeCycle}, #{item.executeFrequency}, sysdate(), #{item.remark})
         </foreach>
     </insert>

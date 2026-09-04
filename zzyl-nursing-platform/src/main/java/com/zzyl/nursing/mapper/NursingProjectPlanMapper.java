@@ -11,8 +11,8 @@ import org.apache.ibatis.annotations.Param;
 /**
  * 护理计划和项目关联Mapper接口
  * 
- * @author bot975
- * @date 2026-09-01
+ * @author alexis
+ * @date 2025-06-08
  */
 @Mapper
 public interface NursingProjectPlanMapper extends BaseMapper<NursingProjectPlan>
@@ -65,21 +65,15 @@ public interface NursingProjectPlanMapper extends BaseMapper<NursingProjectPlan>
      */
     public int deleteNursingProjectPlanByIds(Long[] ids);
 
-    int batchInsert(@Param("list")List<NursingProjectPlan> projectPlans, @Param("planId")Long planId);
-
+    int batchInsert(@Param("list") List<NursingProjectPlan> projectPlans, @Param("planId") Long planId);
 
     /**
-     * 根据护理计划id查询关联护理项目列表
-     * @param planId
+     * 根据护理计划ID查询关联的护理项目列表
+     * @param planId    护理计划id
      * @return
      */
     List<NursingProjectPlanVo> selectByNursingPlanId(@Param("planId") Long planId);
 
-
-    /**
-     * 根据护理计划id删除关联护理项目
-     * @param planId
-     */
-    @Delete("DELETE FROM nursing_project_plan WHERE plan_id = #{planId}")
+    @Delete("delete from nursing_project_plan where plan_id = #{planId}")
     void deleteByNursingPlanId(@Param("planId") Long planId);
 }

@@ -115,7 +115,7 @@ public class SwaggerConfig
                 // 设置标题
                 .title("标题：中州养老系统_接口文档")
                 // 描述
-                .description("描述：用于管理中州养老系统后端接口...")
+                .description("描述：用于管理中州养老系统后端接口")
                 // 作者信息
                 .contact(new Contact(ruoyiConfig.getName(), null, null))
                 // 版本

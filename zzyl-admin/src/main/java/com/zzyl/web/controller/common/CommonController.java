@@ -86,6 +86,7 @@ public class CommonController
             String filePath = RuoYiConfig.getUploadPath();
             // 上传并返回新文件名称
 //            String fileName = FileUploadUtils.upload(filePath, file);
+
             String url = aliyunOSSOperator.upload(file.getBytes(), file.getOriginalFilename());
 //            String url = serverConfig.getUrl() + fileName;
             AjaxResult ajax = AjaxResult.success();

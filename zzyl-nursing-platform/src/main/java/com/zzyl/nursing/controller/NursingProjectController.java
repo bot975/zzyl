@@ -30,10 +30,10 @@ import com.zzyl.common.core.page.TableDataInfo;
 /**
  * 护理项目Controller
  * 
- * @author bot975
- * @date 2026-08-24
+ * @author alexis
+ * @date 2025-06-02
  */
-@Api(tags = "护理项目管理")
+@Api("护理项目管理")
 @RestController
 @RequestMapping("/nursing/project")
 public class NursingProjectController extends BaseController
@@ -71,10 +71,10 @@ public class NursingProjectController extends BaseController
     /**
      * 获取护理项目详细信息
      */
-    @ApiOperation("获取护理项目详细信息}")
+    @ApiOperation("获取护理项目详细信息")
     @PreAuthorize("@ss.hasPermi('nursing:project:query')")
     @GetMapping(value = "/{id}")
-    public R<NursingProject> getInfo(@PathVariable("id") @ApiParam("护理项目id") Long id)
+    public R<NursingProject> getInfo(@PathVariable("id") @ApiParam("护理项目ID") Long id)
     {
         return R.ok(nursingProjectService.selectNursingProjectById(id));
     }
@@ -86,7 +86,7 @@ public class NursingProjectController extends BaseController
     @PreAuthorize("@ss.hasPermi('nursing:project:add')")
     @Log(title = "护理项目", businessType = BusinessType.INSERT)
     @PostMapping
-    public AjaxResult add(@RequestBody @ApiParam("新增护理项目对象") NursingProject nursingProject)
+    public AjaxResult add(@RequestBody @ApiParam("新增的护理项目对象") NursingProject nursingProject)
     {
         return toAjax(nursingProjectService.insertNursingProject(nursingProject));
     }
@@ -98,7 +98,7 @@ public class NursingProjectController extends BaseController
     @PreAuthorize("@ss.hasPermi('nursing:project:edit')")
     @Log(title = "护理项目", businessType = BusinessType.UPDATE)
     @PutMapping
-    public AjaxResult edit(@RequestBody @ApiParam("修改护理项目对象") NursingProject nursingProject)
+    public AjaxResult edit(@RequestBody @ApiParam("修改的护理项目对象") NursingProject nursingProject)
     {
         return toAjax(nursingProjectService.updateNursingProject(nursingProject));
     }
@@ -110,14 +110,11 @@ public class NursingProjectController extends BaseController
     @PreAuthorize("@ss.hasPermi('nursing:project:remove')")
     @Log(title = "护理项目", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{ids}")
-    public AjaxResult remove(@PathVariable @ApiParam("要删除的护理项目数组") Long[] ids)
+    public AjaxResult remove(@PathVariable @ApiParam("要删除的护理项目ID") Long[] ids)
     {
         return toAjax(nursingProjectService.deleteNursingProjectByIds(ids));
     }
 
-    /**
-     * 查询所有护理项目
-     */
     @GetMapping("/all")
     public AjaxResult getAll() {
         List<NursingProjectVo> list = nursingProjectService.getAll();

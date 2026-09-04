@@ -35,7 +35,7 @@ import com.zzyl.common.core.page.TableDataInfo;
  * @author ${author}
  * @date ${datetime}
  */
-@Api(tags = "${functionName}管理")
+@Api("${functionName}管理")
 @RestController
 @RequestMapping("/${moduleName}/${businessName}")
 public class ${ClassName}Controller extends BaseController
@@ -81,10 +81,10 @@ public class ${ClassName}Controller extends BaseController
     /**
      * 获取${functionName}详细信息
      */
-    @ApiOperation("获取${functionName}详细信息}")
+    @ApiOperation("获取${functionName}详细信息")
     @PreAuthorize("@ss.hasPermi('${permissionPrefix}:query')")
     @GetMapping(value = "/{${pkColumn.javaField}}")
-    public R<${ClassName}> getInfo(@PathVariable("${pkColumn.javaField}") @ApiParam("${functionName}id") ${pkColumn.javaType} ${pkColumn.javaField})
+    public R<${ClassName}> getInfo(@PathVariable("${pkColumn.javaField}") @ApiParam("${functionName}ID") ${pkColumn.javaType} ${pkColumn.javaField})
     {
         return R.ok(${className}Service.select${ClassName}By${pkColumn.capJavaField}(${pkColumn.javaField}));
     }
@@ -96,7 +96,7 @@ public class ${ClassName}Controller extends BaseController
     @PreAuthorize("@ss.hasPermi('${permissionPrefix}:add')")
     @Log(title = "${functionName}", businessType = BusinessType.INSERT)
     @PostMapping
-    public AjaxResult add(@RequestBody @ApiParam("新增${functionName}对象") ${ClassName} ${className})
+    public AjaxResult add(@RequestBody @ApiParam("新增的${functionName}对象") ${ClassName} ${className})
     {
         return toAjax(${className}Service.insert${ClassName}(${className}));
     }
@@ -108,7 +108,7 @@ public class ${ClassName}Controller extends BaseController
     @PreAuthorize("@ss.hasPermi('${permissionPrefix}:edit')")
     @Log(title = "${functionName}", businessType = BusinessType.UPDATE)
     @PutMapping
-    public AjaxResult edit(@RequestBody @ApiParam("修改${functionName}对象") ${ClassName} ${className})
+    public AjaxResult edit(@RequestBody @ApiParam("修改的${functionName}对象") ${ClassName} ${className})
     {
         return toAjax(${className}Service.update${ClassName}(${className}));
     }
@@ -120,7 +120,7 @@ public class ${ClassName}Controller extends BaseController
     @PreAuthorize("@ss.hasPermi('${permissionPrefix}:remove')")
     @Log(title = "${functionName}", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{${pkColumn.javaField}s}")
-    public AjaxResult remove(@PathVariable @ApiParam("要删除的${functionName}数组") ${pkColumn.javaType}[] ${pkColumn.javaField}s)
+    public AjaxResult remove(@PathVariable @ApiParam("要删除的${functionName}ID") ${pkColumn.javaType}[] ${pkColumn.javaField}s)
     {
         return toAjax(${className}Service.delete${ClassName}By${pkColumn.capJavaField}s(${pkColumn.javaField}s));
     }

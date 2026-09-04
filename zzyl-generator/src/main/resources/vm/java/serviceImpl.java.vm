@@ -107,7 +107,7 @@ public class ${ClassName}ServiceImpl extends ServiceImpl<${ClassName}Mapper, ${C
         insert${subClassName}(${className});
 #end
 ##        return ${className}Mapper.update${ClassName}(${className});
-        return updateById(${className})? 1: 0;
+        return updateById(${className}) ? 1 : 0;
     }
 
     /**

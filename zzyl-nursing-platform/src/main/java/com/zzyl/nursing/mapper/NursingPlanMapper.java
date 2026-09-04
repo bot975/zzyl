@@ -1,16 +1,15 @@
 package com.zzyl.nursing.mapper;
 
 import java.util.List;
-
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.zzyl.nursing.domain.NursingPlan;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
  * 护理计划Mapper接口
  * 
- * @author bot975
- * @date 2026-08-24
+ * @author alexis
+ * @date 2025-06-02
  */
 @Mapper
 public interface NursingPlanMapper extends BaseMapper<NursingPlan>
