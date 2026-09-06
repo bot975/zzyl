@@ -105,4 +105,12 @@ public class RoomController extends BaseController
         return toAjax(roomService.deleteRoomByIds(ids));
     }
 
+    @GetMapping("/one/{id}")
+    @ApiOperation("获取房间详细信息")
+    public R<RoomVo> getRoomById(@ApiParam(value = "房间ID", required = true)  @PathVariable("id") Long id)
+    {
+        RoomVo roomVo = roomService.getRoomById(id);
+        return R.ok(roomVo);
+    }
+
 }
