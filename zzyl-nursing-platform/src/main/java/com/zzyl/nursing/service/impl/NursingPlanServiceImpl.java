@@ -3,7 +3,9 @@ package com.zzyl.nursing.service.impl;
 import java.util.Arrays;
 import java.util.List;
 
+import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.zzyl.common.constant.CacheConstants;
 import com.zzyl.common.utils.DateUtils;
 import com.zzyl.common.utils.bean.BeanUtils;
 import com.zzyl.nursing.domain.NursingProjectPlan;
@@ -12,6 +14,7 @@ import com.zzyl.nursing.mapper.NursingProjectPlanMapper;
 import com.zzyl.nursing.vo.NursingPlanVo;
 import com.zzyl.nursing.vo.NursingProjectPlanVo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import com.zzyl.nursing.mapper.NursingPlanMapper;
 import com.zzyl.nursing.domain.NursingPlan;
@@ -33,6 +36,9 @@ public class NursingPlanServiceImpl extends ServiceImpl<NursingPlanMapper, Nursi
 
     @Autowired
     private NursingProjectPlanMapper nursingProjectPlanMapper;
+
+    @Autowired
+    private RedisTemplate<Object, Object> redisTemplate;
 
     /**
      * 查询护理计划
@@ -89,6 +95,7 @@ public class NursingPlanServiceImpl extends ServiceImpl<NursingPlanMapper, Nursi
 
         // 2.批量保存护理计划和护理项目的对应关系
         int count = nursingProjectPlanMapper.batchInsert(dto.getProjectPlans(), nursingPlan.getId());
+        deleteCache();
         return count == 0 ? 0 : 1;
     }
 
@@ -115,7 +122,9 @@ public class NursingPlanServiceImpl extends ServiceImpl<NursingPlanMapper, Nursi
         BeanUtils.copyProperties(dto, nursingPlan);
 
         // 修改护理计划
-        return nursingPlanMapper.updateById(nursingPlan);
+        int i = nursingPlanMapper.updateById(nursingPlan);
+        deleteCache();
+        return i;
     }
 
     /**
@@ -127,7 +136,10 @@ public class NursingPlanServiceImpl extends ServiceImpl<NursingPlanMapper, Nursi
     @Override
     public int deleteNursingPlanByIds(Long[] ids)
     {
-        return removeByIds(Arrays.asList(ids)) ? 1 : 0;
+
+        boolean flag = removeByIds(Arrays.asList(ids));
+        deleteCache();
+        return flag ? 1 : 0;
     }
 
     /**
@@ -143,7 +155,14 @@ public class NursingPlanServiceImpl extends ServiceImpl<NursingPlanMapper, Nursi
         // 删除护理计划关联的护理项目
         nursingProjectPlanMapper.deleteByNursingPlanId(id);
         // 删除护理计划
-        return removeById(id) ? 1 : 0;
+        boolean flag = removeById(id);
+        // 清除缓存
+        deleteCache();
+        return flag ? 1 : 0;
+    }
+
+    private void deleteCache() {
+        redisTemplate.delete(CacheConstants.NURSING_PLAN_ALL_KEY);
     }
 
     /**
@@ -153,8 +172,14 @@ public class NursingPlanServiceImpl extends ServiceImpl<NursingPlanMapper, Nursi
      */
     @Override
     public List<NursingPlan> getAllNursingPlans() {
+        List<NursingPlan> list = (List<NursingPlan>) redisTemplate.opsForValue().get(CacheConstants.NURSING_PLAN_ALL_KEY);
+        if (ObjectUtil.isNotEmpty(list)){
+            return list;
+        }
         LambdaQueryWrapper<NursingPlan> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.eq(NursingPlan::getStatus, 1);
-        return list(queryWrapper);
+        list = list(queryWrapper);
+        redisTemplate.opsForValue().set(CacheConstants.NURSING_PLAN_ALL_KEY, list);
+        return list;
     }
 }
