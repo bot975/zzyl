@@ -25,5 +25,5 @@ fi
 # 启动容器
 echo "启动容器 $container_name"
 if [ $container_name = "zzyl-admin" ]; then
-    docker run -d --restart=always --name $container_name -v /usr/local/zzyl-admin/logs:/home/ruoyi/logs -p 9000:9000 $image_name:$image_tag
+    docker run -d --restart=always --name $container_name -e OSS_ACCESS_KEY_ID -e OSS_ACCESS_KEY_SECRET -v /usr/local/zzyl-admin/logs:/home/ruoyi/logs -p 9000:9000 $image_name:$image_tag
 fi
