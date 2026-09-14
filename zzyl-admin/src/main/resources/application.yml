@@ -140,3 +140,14 @@ aliyun:
 
 dept:
   nursingId: 201
+
+
+# 百度千帆大模型配置
+baidu:
+  qianfan:
+    apiKey: ${BAIDU_QIANFAN_API_KEY:}
+    baseUrl: https://qianfan.baidubce.com/v2/
+    model: ernie-4.5-turbo-32k
+
+
+
